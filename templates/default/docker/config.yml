@@ -1,0 +1,26 @@
+# The `common' part is automatically included (and possibly overriden by all
+# other flavors)
+common:
+    # Set a random string here
+    secret_key: <%= @secret =>
+
+
+# This is the default configuration when no flavor is specified
+dev:
+    storage: local
+    storage_path: /tmp/registry
+    loglevel: debug
+
+
+# This flavor stores the images in Glance (to integrate with openstack)
+# See also: https://github.com/dotcloud/openstack-docker
+openstack:
+    storage: glance
+    storage_alternate: local
+    storage_path: /tmp/registry
+    loglevel: debug
+    OS_USERNAME: admin
+    OS_PASSWORD: <%= node['admin']['password'] %
+    OS_TENANT_NAME: admin
+    OS_GLANCE_URL: http://<%= node['glance']['private_ip'] %>:9292
+    OS_AUTH_URL: http://<%= node['keystone']['private_ip'] %>:35357/v2.0
