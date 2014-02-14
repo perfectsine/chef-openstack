@@ -2,7 +2,7 @@
 # other flavors)
 common:
     # Set a random string here
-    secret_key: <%= @secret =>
+    secret_key: 9660c62e-9aff-44ec-ba87-1273ab9d2dc5
 
 
 # This is the default configuration when no flavor is specified
@@ -19,8 +19,3 @@ openstack:
     storage_alternate: local
     storage_path: /tmp/registry
     loglevel: debug
-    OS_USERNAME: admin
-    OS_PASSWORD: <%= node['admin']['password'] %
-    OS_TENANT_NAME: admin
-    OS_GLANCE_URL: http://<%= node['glance']['private_ip'] %>:9292
-    OS_AUTH_URL: http://<%= node['keystone']['private_ip'] %>:35357/v2.0

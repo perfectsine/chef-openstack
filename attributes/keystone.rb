@@ -34,6 +34,8 @@ default['keystone']['region_servers'] = nil
 # to prevent further runs.
 admin_pass = node[:admin][:password]
 
+default['keystone']['setup_initial_environment'] = true
+
 default['keystone']['default_accounts']['users'] = {
   'admin' => {'email' => 'root@localhost', 'password' => admin_pass },
   'demo' => {'email' => 'demo@localhost', 'password' => admin_pass },

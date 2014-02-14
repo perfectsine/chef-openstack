@@ -28,7 +28,7 @@ template "/etc/apt/sources.list.d/docker.list" do
 end
 
 packages = %w[lxc-docker
-              nova-compute-lxc] 
+              nova-compute-qemu] 
 
 packages.each do |pkg|
   package pkg do
@@ -64,19 +64,6 @@ template 'Nova compute configuration' do
   group 'nova'
   mode '0600'
   notifies :restart, resources(:service => 'nova-compute'), :immediately
-end
-
-if node['docker']['registry']['secret'] == nil
-  require 'SecureRandom'
-  node['docker']['registry']['secret'] = SecureRandom.uuid
-end
-
-template "PLACE_HOLDER/DOCKER/REGISTRY" do
-  source "docker/config.yml"
-  owner "root"
-  group "root"
-  mode "0644"
-  variables( :secret => node['docker']['registry']['secret'] )
 end
 
 include_recipe "chef-openstack::neutron-compute"

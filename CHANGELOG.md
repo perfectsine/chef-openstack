@@ -1,5 +1,10 @@
 # CHANGELOG for OpenStack Havana recipes
 
+## 0.3.5
+
+* Added support for Docker hypervisor
+
+
 ## 0.3.4
 
 * Removed roles from cookbook, recipes are now used in place

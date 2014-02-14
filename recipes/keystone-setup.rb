@@ -107,3 +107,5 @@ chef_openstack_keystone 'Create endpoint for Neutron' do
   admin_url "http://#{node[:controller][:private_ip]}:9696/"
   service_type 'neutron'
 end
+
+node.default['keystone']['setup_initial_environment'] = false

@@ -2,6 +2,7 @@ base_packages = %w[python-software-properties
                    software-properties-common]
 
 admin_packages = %w[linux-headers-generic
+                    git
                     curl
                     vim
                     ipcalc

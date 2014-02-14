@@ -147,5 +147,6 @@ end
 # END Keystone HTTP setup
 # =================================================
 
-
-include_recipe 'chef-openstack::keystone-setup'
+if node['keystone']['setup_initial_environment'] == true
+  include_recipe 'chef-openstack::keystone-setup'
+end
