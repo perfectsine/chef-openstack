@@ -4,6 +4,7 @@ packages = %w[build-essential
         	  python-pip
         	  libssl-dev
         	  liblzma-dev
+            libffi-dev
         	  git] 
 
 packages.each do |pkg|

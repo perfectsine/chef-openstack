@@ -1,14 +1,23 @@
 include_recipe 'chef-openstack::common'
-include_recipe "chef-openstack::libvirt"
+#include_recipe "chef-openstack::libvirt"
 
-if node[:node_info][:is_vm] == 'True'
-  package 'nova-compute-qemu' do
-    action :install
+bash 'Clean libvirt networks' do
+  user 'root'
+  code <<-EOH
+  virsh net-destroy default
+  virsh net-undefine default
+  EOH
+  action :nothing
+end
+
+package "nova-compute" do
+  action :install
+  if node[:node_info][:is_vm] == 'True'
+    package_name "nova-compute-qemu"
+  else
+    package_name "nova-compute-kvm"
   end
-else
-  package 'nova-compute-kvm' do
-    action :install
-  end
+  notifies :run, "bash[Clean libvirt networks]", :immediately
 end
 
 service 'nova-compute' do
